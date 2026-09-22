@@ -1,0 +1,21 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Environment
+.venv/
+__pycache__/
+*.py[cod]
+
+# Data and run artefacts
+data/
+runs/
+
+# Per-user Claude Code settings (shared settings live in .claude/settings.json)
+.claude/settings.local.json
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

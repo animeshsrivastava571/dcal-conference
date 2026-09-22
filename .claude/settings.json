@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.github.com)",
+      "Bash(env -u VIRTUAL_ENV PYTHONPATH=src .venv/bin/python -)",
+      "Bash(env -u VIRTUAL_ENV PYTHONPATH=src .venv/bin/python -m pytest tests/ -q)"
+    ]
+  }
+}
