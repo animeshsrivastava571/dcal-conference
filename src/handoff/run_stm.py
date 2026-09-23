@@ -22,8 +22,11 @@ from handoff.data.sessions import sample_sessions
 from handoff.memory.summarization import ceiling, langmem_default, langmem_prompted
 
 # Sessions measure 3.1k-5.6k tokens, so these budgets bracket the point where
-# summarisation first fires and then fires repeatedly.
-SWEEP = (768, 1536, 3072)
+# summarisation first fires and then fires repeatedly. @3072 was dropped: it
+# triggers barely one compression round and lands within a few points of the
+# ceiling, so it consumed a quarter of every run to restate the control. The
+# completed runs already carry it for the published dose-response.
+SWEEP = (768, 1536)
 
 # A dead key or an empty balance fails every remaining call. Without this the
 # runner spends the whole grid printing tracebacks and writes a summary that
@@ -36,9 +39,10 @@ def _is_fatal(error: Exception) -> bool:
     return any(marker in message for marker in FATAL)
 
 
-def _arms(condition: str):
+def _arms(condition: str, with_ceiling: bool = True):
     factory = langmem_default if condition == "3a" else langmem_prompted
-    yield "C", ceiling
+    if with_ceiling:
+        yield "C", ceiling
     for budget in SWEEP:
         yield f"{condition}@{budget}", (lambda b=budget: factory(max_tokens=b))
 
@@ -47,6 +51,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sessions", type=int, default=10)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument(
+        "--no-ceiling",
+        action="store_true",
+        help="skip the C arm when an identical ceiling already exists for these sessions",
+    )
     parser.add_argument(
         "--condition",
         choices=("3a", "3b"),
@@ -80,7 +89,7 @@ def main() -> None:
     for i, session in enumerate(sessions, 1):
         print(f"[{i}/{len(sessions)}] {session.ticker} {session.n_turns} turns", flush=True)
         record = {"ticker": session.ticker, "n_turns": session.n_turns, "arms": {}}
-        for base_arm, factory in _arms(args.condition):
+        for base_arm, factory in _arms(args.condition, not args.no_ceiling):
             arm = f"{base_arm}{suffix}"
             try:
                 result = run_chained_session(

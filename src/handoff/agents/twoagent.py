@@ -23,6 +23,7 @@ from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command
 from typing_extensions import TypedDict
 
+from handoff.agents.caching import mark_cache_breakpoint
 from handoff.config import MODEL_ID
 from handoff.data.sessions import ChainedSession
 from handoff.eval.correctness import grade
@@ -65,11 +66,13 @@ def _build_graph(llm: ChatAnthropic):
         if state["filing"]:
             prompt = f"{state['filing']}\n\nThe analyst asks: {state['question']}"
         response = llm.invoke(
-            [
-                SystemMessage(content=RETRIEVAL_INSTRUCTIONS),
-                *state["history"],
-                HumanMessage(content=prompt),
-            ]
+            mark_cache_breakpoint(
+                [
+                    SystemMessage(content=RETRIEVAL_INSTRUCTIONS),
+                    *state["history"],
+                    HumanMessage(content=prompt),
+                ]
+            )
         )
         return Command(goto="analysis", update={"digest": response.text})
 

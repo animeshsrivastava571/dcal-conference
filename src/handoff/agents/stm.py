@@ -13,6 +13,7 @@ from dataclasses import dataclass, field
 from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
+from handoff.agents.caching import mark_cache_breakpoint
 from handoff.config import MODEL_ID
 from handoff.data.sessions import ChainedSession
 from handoff.eval.correctness import grade
@@ -99,7 +100,10 @@ def run_chained_session(
         # Compress the history, then ask. Including the pending question in the
         # window lets a tight budget summarise it away, leaving a request with
         # no user message at all.
-        prepared = [*policy.prepare([system, *history]), user_message]
+        prepared = [
+            *mark_cache_breakpoint(policy.prepare([system, *history])),
+            user_message,
+        ]
         response = llm.invoke(prepared)
         prediction = response.text
 

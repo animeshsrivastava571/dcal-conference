@@ -25,8 +25,9 @@ from handoff.run_stm import _is_fatal
 SWEEP = (768, 1536)
 
 
-def _arms():
-    yield "C", ceiling
+def _arms(with_ceiling: bool = True):
+    if with_ceiling:
+        yield "C", ceiling
     for budget in SWEEP:
         yield f"3a@{budget}", (lambda b=budget: langmem_default(max_tokens=b))
 
@@ -35,6 +36,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sessions", type=int, default=12)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument(
+        "--no-ceiling",
+        action="store_true",
+        help="skip the C arm when an identical ceiling already exists for these sessions",
+    )
     parser.add_argument("--free", action="store_true", help="permit abstention")
     args = parser.parse_args()
 
@@ -53,7 +59,7 @@ def main() -> None:
     for i, session in enumerate(sessions, 1):
         print(f"[{i}/{len(sessions)}] {session.ticker} {session.n_turns} turns", flush=True)
         record = {"ticker": session.ticker, "n_turns": session.n_turns, "arms": {}}
-        for arm, factory in _arms():
+        for arm, factory in _arms(not args.no_ceiling):
             try:
                 result = run_two_agent_session(session, factory(), forced=forced)
             except Exception as error:
