@@ -3,7 +3,8 @@
     "allow": [
       "WebFetch(domain:api.github.com)",
       "Bash(env -u VIRTUAL_ENV PYTHONPATH=src .venv/bin/python -)",
-      "Bash(env -u VIRTUAL_ENV PYTHONPATH=src .venv/bin/python -m pytest tests/ -q)"
+      "Bash(env -u VIRTUAL_ENV PYTHONPATH=src .venv/bin/python -m pytest tests/ -q)",
+      "Bash(awk '{print $2, $3\"%cpu\", $11, $12, $13, $14, $15}')"
     ]
   }
 }
