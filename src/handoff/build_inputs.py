@@ -1,8 +1,14 @@
-"""Build convfinqa-evaluation-inputs.xlsx: the released evaluation INPUTS.
+"""Build lost-in-handoff-dataset.xlsx: the single released workbook.
 
-Public ConvFinQA source material plus the exact sessions and cross-session pairs
-the experiments used. It deliberately contains no model predictions, accuracy
-or memory columns: public input alone cannot recreate those results.
+Two kinds of sheet, labelled so they cannot be confused:
+
+- inputs: public ConvFinQA source material plus the exact sessions and
+  cross-session pairs the experiments used;
+- results_*: the aggregate numbers behind the paper's figures and tables.
+
+There are no turn-level model predictions, accuracy or memory columns: the
+inputs alone cannot recreate those results, and the turn-level outputs are not
+released.
 
     python -m handoff.build_inputs
 
@@ -12,7 +18,6 @@ match the reference values, which is how incorrect sampling is detected.
 
 from __future__ import annotations
 
-import csv
 import hashlib
 import json
 import math
@@ -27,11 +32,12 @@ from openpyxl import Workbook
 from openpyxl.styles import Font
 
 from handoff.config import DATA_DIR, PROJECT_ROOT
+from handoff.paper_results import FIG1, FIG2, FIG3, REPORTED, TABLE1, TABLE2
 
 ARCHIVE = DATA_DIR / "data.zip"
 ARCHIVE_URL = "https://raw.githubusercontent.com/czyssrs/ConvFinQA/main/data.zip"
 ARCHIVE_SHA256 = "d764271fae60d81b62e6d58dfc481807ebc8cfbcd633811241723c4a2101072a"
-OUT = PROJECT_ROOT / "dataset" / "convfinqa-evaluation-inputs.xlsx"
+OUT = PROJECT_ROOT / "dataset" / "lost-in-handoff-dataset.xlsx"
 
 SESSION_MIN, SESSION_MAX = 15, 20
 N_COMPANIES = 115
@@ -296,11 +302,12 @@ def main() -> None:
         raise SystemExit("\nSampling does not match the reference; workbook NOT written.")
 
     readme = [
-        ["Public ConvFinQA evaluation INPUTS only; no predictions."],
+        ["Lost in Handoff: evaluation inputs and aggregate results. No turn-level predictions."],
         [""],
-        ["This workbook contains the public source questions, gold answers, programs and filings, "
-         "and the exact sessions and cross-session pairs used in 'Lost in Handoff'. It contains no "
-         "model predictions, accuracy, or memory contents: public input alone cannot recreate those results."],
+        ["This workbook has two kinds of sheet. The input sheets hold the public ConvFinQA source "
+         "questions, gold answers, programs and filings, and the exact sessions and cross-session pairs "
+         "used in the paper. The results_ sheets hold the aggregate numbers behind its figures and "
+         "tables. Turn-level model predictions, accuracy and memory contents are not released."],
         [""],
         [f"Source: {ARCHIVE_URL}"],
         [f"SHA-256: {ARCHIVE_SHA256}"],
@@ -319,7 +326,7 @@ def main() -> None:
         ["eligible: numeric gold that does not equal (1% relative, 1e-6 absolute) any numeric gold in "
          "the earlier/other conversation. ambiguous: numeric gold that does."],
         [""],
-        ["Sheets"],
+        ["Input sheets"],
         [f"source_conversations: {len(source_conversations)} conversations (union of session and pair conversations)"],
         [f"source_turns: {len(source_turns)} original turns of those conversations"],
         [f"session_turns: {len(session_turns)} turns across {len(sessions)} chained sessions"],
@@ -327,6 +334,17 @@ def main() -> None:
          f"({observed['period_eligible']} eligible)"],
         [f"cross_entity_pairs: {len(entity_rows)} test turns from {len(entity_pairs)} pairs "
          f"({observed['entity_eligible']} eligible)"],
+        [""],
+        ["Results sheets (aggregate numbers reported in the paper; percentages unless labelled; model "
+         "claude-haiku-4-5-20251001; compaction triggers of 768 and 1536 tokens; 'permitted' and "
+         "'forced' refer to whether the agent may abstain)"],
+        ["results_fig1_by_depth: Fig. 1, accuracy by turn-depth bucket, permitted-abstention run"],
+        ["results_fig2_by_round: Fig. 2, accuracy by compaction round, forced-answer runs at 768; "
+         "blank cells are rounds a policy never reached"],
+        ["results_fig3_fields: Fig. 3, field presence in carried memory, forced-answer runs at 768"],
+        ["results_table1: Table I, forced-answer outcomes at the 768-token trigger"],
+        ["results_table2: Table II, potentially dependent turns, conditional on earlier model answers"],
+        ["results_reported_values: further values quoted in the text, with their section; labels name the unit where a value is a count or a difference in points"],
     ]
 
     wb = Workbook()
@@ -359,18 +377,21 @@ def main() -> None:
                  "question", "gold", "is_computed", "eligible", "ambiguous"],
                 entity_rows)
 
+    for name, table in [
+        ("results_fig1_by_depth", FIG1),
+        ("results_fig2_by_round", FIG2),
+        ("results_fig3_fields", FIG3),
+        ("results_table1", TABLE1),
+        ("results_table2", TABLE2),
+    ]:
+        write_sheet(wb, name, list(table), [list(row) for row in zip(*table.values())])
+    write_sheet(wb, "results_reported_values",
+                ["section", "quantity", "value", "note"], [list(row) for row in REPORTED])
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     wb.save(OUT)
     print(f"\nwrote {OUT.relative_to(PROJECT_ROOT)} ({OUT.stat().st_size:,} bytes)")
-
-    # The paper also promises the pairs as separate CSVs.
-    for name in ("cross_period_pairs", "cross_entity_pairs"):
-        path = OUT.parent / f"{name}.csv"
-        with path.open("w", newline="", encoding="utf-8") as fh:
-            writer = csv.writer(fh)
-            for row in wb[name].iter_rows(values_only=True):
-                writer.writerow(row)
-        print(f"wrote {path.relative_to(PROJECT_ROOT)}")
+    print("sheets:", ", ".join(wb.sheetnames))
 
 
 if __name__ == "__main__":

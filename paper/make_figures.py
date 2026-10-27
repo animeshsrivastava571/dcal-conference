@@ -1,10 +1,10 @@
-"""Draw paper Figs. 1-3 from the values in paper_results.py.
+"""Draw paper Figs. 1-3 from the values in handoff/paper_results.py.
 
-paper_results.py is the single source for these numbers and also exports them
+That module is the single source for these numbers and also exports them
 in the released results workbook, so the plotted and released values cannot
 drift apart. Exports vector PDF for the LaTeX manuscript and PNG for preview.
 
-    python paper/make_figures.py
+    PYTHONPATH=src python paper/make_figures.py
 """
 
 from __future__ import annotations
@@ -16,7 +16,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from paper_results import FIG1, FIG2, FIG3
+from handoff.paper_results import FIG1, FIG2, FIG3
 
 OUT = Path(__file__).resolve().parent / "figures"
 

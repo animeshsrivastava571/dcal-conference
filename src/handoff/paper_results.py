@@ -1,16 +1,14 @@
-"""The aggregate results reported in the paper, and their release workbook.
+"""The aggregate results reported in the paper.
 
-Single source for Figs. 1-3 and Tables I-II: make_figures.py draws from these
-values and this module exports them, so the released numbers and the plotted
-ones cannot drift apart. Values are transcribed from FIGURE_RECREATION.md,
-which records the curated 115-session result files. Percentages throughout.
-
-    python paper/paper_results.py
+Single source for Figs. 1-3 and Tables I-II: paper/make_figures.py draws from
+these values and handoff.build_inputs writes them into the release workbook, so
+the plotted and released numbers cannot drift apart. Values are transcribed from
+paper/FIGURE_RECREATION.md, which records the curated 115-session result files.
+Percentages throughout.
 """
 
 from __future__ import annotations
 
-from pathlib import Path
 
 # Fig. 1: accuracy by turn-depth bucket, permitted-abstention run.
 FIG1 = {
@@ -57,8 +55,10 @@ TABLE2 = {
     "earlier_wrong": [33.9, 6.8, 5.2, 17.2],
 }
 
-# Further values the text reports, with where they appear.
+# Further values the text reports, with where they appear. Most are percentages;
+# labels name the unit where a value is a count or a difference in points.
 REPORTED = [
+    ("III.D", "Correct default-arm answers needing a non-identity scale factor", 23, "approximate"),
     ("IV.A", "Permitted, full history C, accuracy", 83.89, "n = 1,887"),
     ("IV.A", "Permitted, default prose @1536, accuracy", 69.90, "n = 1,887"),
     ("IV.A", "Permitted, default prose @768, accuracy", 48.60, "n = 1,887"),
@@ -76,77 +76,18 @@ REPORTED = [
     ("IV.B", "Forced full-history reference (own run), answered-wrong", 12.6, ""),
     ("IV.C", "Typed facts @1536, accuracy", 74.8, "one company lacks this arm"),
     ("IV.C", "Sonnet summarizer @768, accuracy (from 46.1)", 48.6, "50 sessions; own ceiling 82.7"),
+    ("IV.C", "Prompted prose minus default @768, points", -1.9, "company-cluster bootstrap interval spans zero"),
+    ("IV.C", "Typed facts minus default @768, bootstrap low, points", 21, "5,000-draw company-level bootstrap; approximate"),
+    ("IV.C", "Typed facts minus default @768, bootstrap high, points", 28, "5,000-draw company-level bootstrap; approximate"),
     ("IV.D", "Scorable turns labelled potentially dependent", 33.2, ""),
+    ("IV.D", "Cross-period, document-present: eligible turns (count)", 161, "50 cross-period pairs"),
+    ("IV.D", "Cross-period, document-present: turns answered with an earlier-year figure (count)", 0, ""),
+    ("IV.D", "Cross-period, memory-only: eligible turns (count)", 161, "50 cross-period pairs"),
+    ("IV.D", "Cross-period, memory-only: turns answered with an earlier-year figure (count)", 1, ""),
+    ("IV.D", "Cross-entity: eligible turns (count)", 185, "50 cross-entity pairs"),
+    ("IV.D", "Cross-entity: matches to the other company's earlier figures (count)", 0, "document-present and memory-only settings"),
     ("IV.E", "Routed multi-agent, full history, accuracy", 53.9, "50 sessions"),
     ("IV.E", "Routed multi-agent, default prose @768, accuracy", 43.1, "50 sessions"),
     ("IV.E", "Routed multi-agent, full history, answered-wrong", 9.0, "50 sessions"),
     ("IV.E", "Routed multi-agent, default prose @768, answered-wrong", 20.2, "50 sessions"),
 ]
-
-OUT = Path(__file__).resolve().parents[1] / "dataset" / "lost-in-handoff-paper-results.xlsx"
-
-README = [
-    "Lost in Handoff: aggregate results reported in the paper.",
-    "",
-    "These are the numbers behind Figs. 1-3, Tables I-II, and other values quoted in the text, "
-    "taken from the curated results of the 115-session experiment runs. Turn-level model outputs "
-    "are not released.",
-    "",
-    "The evaluation inputs (source conversations and turns, chained sessions, and cross-period and "
-    "cross-entity pairs) are in convfinqa-evaluation-inputs.xlsx.",
-    "",
-    "Model: claude-haiku-4-5-20251001. Percentages throughout. Compaction triggers of 768 and 1536 "
-    "tokens. 'Permitted' and 'forced' refer to whether the agent may abstain.",
-    "",
-    "Sheets: fig1_accuracy_by_depth, fig2_accuracy_by_round, fig3_field_presence, "
-    "table1_forced_outcomes, table2_dependent_turns, reported_values.",
-]
-
-
-def _columns_to_rows(table: dict) -> tuple[list[str], list[list]]:
-    header = list(table)
-    return header, [list(row) for row in zip(*table.values())]
-
-
-def main() -> None:
-    from openpyxl import Workbook
-    from openpyxl.styles import Font
-
-    wb = Workbook()
-    ws = wb.worksheets[0]
-    ws.title = "README"
-    for line in README:
-        ws.append([line])
-    ws["A1"].font = Font(bold=True)
-    ws.column_dimensions["A"].width = 120
-
-    sheets = {
-        "fig1_accuracy_by_depth": FIG1,
-        "fig2_accuracy_by_round": FIG2,
-        "fig3_field_presence": FIG3,
-        "table1_forced_outcomes": TABLE1,
-        "table2_dependent_turns": TABLE2,
-    }
-    for name, table in sheets.items():
-        header, rows = _columns_to_rows(table)
-        sheet = wb.create_sheet(name)
-        sheet.append(header)
-        for cell in sheet[1]:
-            cell.font = Font(bold=True)
-        for row in rows:
-            sheet.append(row)
-
-    sheet = wb.create_sheet("reported_values")
-    sheet.append(["section", "quantity", "value", "note"])
-    for cell in sheet[1]:
-        cell.font = Font(bold=True)
-    for row in REPORTED:
-        sheet.append(list(row))
-
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    wb.save(OUT)
-    print(f"wrote {OUT}")
-
-
-if __name__ == "__main__":
-    main()
