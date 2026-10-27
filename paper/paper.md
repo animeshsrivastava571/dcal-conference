@@ -18,9 +18,16 @@ animesh.srivastava@cba.com.au
 
 An answer such as "revenue was 233" is not a usable financial fact without knowing the company, fiscal period, metric, and scale. Financial assistants increasingly carry information from one question to the next, but a finite context window forces them to shorten earlier exchanges. The output may remain fluent after compression even if a year, company, or unit has disappeared. For a practitioner, an answered but wrong question is especially concerning because it is less visible than a refusal.
 
-We evaluate a fixed answering model on ConvFinQA [1], comparing full conversation history with the shipped prose-summary prompts in LangMem [4], a qualifier-preserving prompt, and an accumulating typed-fact policy. The latter turns older conversation messages into records whose context must be represented explicitly and presents them as a compact fact sheet alongside recent dialogue. Our primary result is a 115-company, single-agent comparison. A smaller routed supervisor-and-specialist test examines whether compression also hurts a multi-agent workflow; it is not a four-condition replication. We also report cross-session tests, including predicted failures that were largely absent.
+We evaluate a fixed answering model on ConvFinQA [1], comparing full conversation history with the shipped prose-summary prompts in LangMem [4], a qualifier-preserving prompt, and an accumulating typed-fact policy. The latter turns older conversation messages into records whose context must be represented explicitly and presents them as a compact fact sheet alongside recent dialogue. Our primary result is a 115-company, single-agent comparison. A smaller routed supervisor-and-specialist test examines whether compression also hurts a multi-agent workflow; it is not a four-condition replication. We use *handoff* broadly, for any point where information passes from one stage to the next: from a filing into memory, from one compaction round to the next, and between agents. The agent boundary is one such point and is examined here only in that smaller test. We also report cross-session tests, including predicted failures that were largely absent.
 
 Our contribution couples a concrete financial-memory policy with an evaluation that asks both whether answers are correct and which qualifiers remain in memory. We compare it with shipped prose summarization, instructed prose, and a stronger summarizer; a matched-question test helps locate the largest loss at first compaction. The evaluation sessions, cross-period and cross-entity pairs, and aggregate results are released. The empirical claim is specific: *this typed-fact implementation* recovers much of the accuracy lost by the evaluated prose policy, while the available controls cannot attribute the whole gain to typing alone.
+
+Specifically, the paper contributes:
+
+- a measurement design for repeated compaction in financial question answering: chained ConvFinQA sessions, executed-answer grading, and a matched-question test that locates the largest loss at first compaction;
+- evidence that default prose compaction costs 35.3 accuracy points at a tight trigger, and that forcing an answer turns abstentions into answered-wrong replies at nearly unchanged accuracy;
+- a typed-fact memory policy that recovers about 70 percent of that gap, where an instructed prompt and a stronger summarizer do not;
+- a released workbook of the evaluation inputs and aggregate results.
 
 ## II. Literature Review
 
@@ -44,7 +51,7 @@ ConvFinQA contains 3,892 multi-turn conversations built on S&P 500 financial rep
 
 We therefore concatenate same-company conversations into sessions of approximately 15–20 turns, keeping original questions and filings rather than generating filler. A new filing is shown when a constituent conversation begins. With seed zero and at most one session per company, the full sample contains 115 sessions and 1,887 scorable numerical turns in the main complete arms. Chaining is a deliberate measurement instrument: it exposes compaction and repeated compression, but does not estimate the prevalence of such dense topic changes in ordinary analyst workflows.
 
-The answerer is Claude Haiku 4.5, model snapshot `claude-haiku-4-5-20251001`. The same questions and company sample are used across the principal policies. Results at the 768- and 1536-token compaction triggers are separate conditions; these triggers determine when memory is summarized, not the maximum length of every downstream answer.
+The answerer is Claude Haiku 4.5, model snapshot `claude-haiku-4-5-20251001`. The same questions and company sample are used across the principal policies. Results at the 768- and 1536-token compaction triggers are separate conditions; these triggers determine when memory is summarized, not the maximum length of every downstream answer. Measured with the approximate token count LangMem uses, a chained session holds a median of about 4,800 tokens of history (10th–90th percentile 2,900–6,500), so the two triggers sit near 16 and 32 percent of a typical session. They are set relative to session length, not to production context windows, which are far larger.
 
 ### B. Memory policies
 
@@ -55,7 +62,7 @@ The primary single-agent experiment compares four short-term memory policies. A 
 - **3b, instructed prose**: the same running-summary mechanism, with prompts requiring each retained figure to preserve company, fiscal period, and unit or scale.
 - **3c, typed facts**: a custom structured extractor produces records with entity, period, metric, numeric value, and unit fields. A rendered, accumulating fact sheet replaces older messages while recent messages remain available.
 
-No dedicated no-memory floor was run. The 3c policy is inspired by the context attached to financial facts in XBRL, but is not an XBRL implementation and is not the LangMem long-term store. It also differs from 3a/3b in more than representation: its extractor allows more output tokens and its facts accumulate rather than being recursively re-summarized. Section VI treats this asymmetry as a limitation of any structure-only causal interpretation.
+No dedicated no-memory floor was run. The 3c policy is inspired by the context attached to financial facts in XBRL [9], but is not an XBRL implementation and is not the LangMem long-term store. It also differs from 3a/3b in more than representation: its extractor allows more output tokens and its facts accumulate rather than being recursively re-summarized. Section VI treats this asymmetry as a limitation of any structure-only causal interpretation.
 
 ### C. Typed-Fact Memory in Practice
 
@@ -118,7 +125,7 @@ $$
 R(x) = \frac{A_x - A_{3a}}{A_C - A_{3a}}, \tag{1}
 $$
 
-where $A_x$ is arm $x$'s accuracy at the tight trigger. For the reported recovery, $A_C$ is the ceiling measured in the 3c run; the separately run forced ceilings range from 82.9 to 84.3 percent. The instructed prose policy scores 46.4 percent, 1.9 points below default, and its company-cluster bootstrap interval for that difference spans zero. Typed facts score 72.4 percent, an improvement of 24.1 points over default and approximately 70 percent recovery under (1). A 5,000-draw company-level bootstrap places the improvement at approximately 21–28 percentage points. At the looser 1536-token trigger the typed policy scores about 74.8 percent; one company lacks this arm, so it is not an exact 115-company paired comparison at that budget.
+where $A_x$ is arm $x$'s accuracy at the tight trigger. For the reported recovery, $A_C$ is the ceiling measured in the 3c run; the separately run forced ceilings range from 82.9 to 84.3 percent. The instructed prose policy scores 46.4 percent, 1.9 points below default, and its company-cluster bootstrap interval for that difference spans zero. Typed facts score 72.4 percent, an improvement of 24.1 points over default and approximately 70 percent recovery under (1). A 5,000-draw company-level bootstrap [10] places the improvement at approximately 21–28 percentage points. At the looser 1536-token trigger the typed policy scores about 74.8 percent; one company lacks this arm, so it is not an exact 115-company paired comparison at that budget.
 
 Figure 3 shows a corresponding difference in independently measured field presence. At the tight trigger, the entity is findable in 24.7 percent of default prose memories, 24.5 percent of instructed prose memories, and about 93 percent of typed fact sheets. Period presence increases from about 83 to 94 percent between default and typed memory. Value presence is still only about 21 to 28 percent under this strict matching procedure. These measurements are suggestive of a retention mechanism but do not verify correct fact-to-qualifier linkage at answer time.
 
@@ -181,3 +188,7 @@ In long, constructed financial-document sessions, default conversational compact
 [7] D. Jiang *et al.*, "Anatomy of agentic memory: Taxonomy and empirical analysis of evaluation and system limitations," arXiv:2602.19320, 2026.
 
 [8] S. M. Abtahi *et al.*, "Memanto: Typed semantic memory with information-theoretic retrieval for long-horizon agents," arXiv:2604.22085, 2026.
+
+[9] XBRL International, "Extensible Business Reporting Language (XBRL) 2.1," Recommendation, 2003; errata corrections 2013.
+
+[10] B. Efron and R. J. Tibshirani, *An Introduction to the Bootstrap*. New York: Chapman & Hall, 1993.
