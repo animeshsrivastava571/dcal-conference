@@ -1,0 +1,188 @@
+pair_index,other_ticker,other_conversation_id,other_year,test_ticker,test_conversation_id,test_year,test_turn_index,question,gold,is_computed,eligible,ambiguous
+0,RL,Double_RL/2008/page_21.pdf,2008,EXPD,Single_EXPD/2017/page_30.pdf-1,2017,0,what was the change in the value of the expeditors international of washington inc . from 2012 to 2017?,76.08,True,True,False
+0,RL,Double_RL/2008/page_21.pdf,2008,EXPD,Single_EXPD/2017/page_30.pdf-1,2017,1,and what was that change for standard and poor's 500 index during the same period?,108.14,True,True,False
+0,RL,Double_RL/2008/page_21.pdf,2008,EXPD,Single_EXPD/2017/page_30.pdf-1,2017,2,"how much does the expeditors international of washington inc . change represent in relation to the the value of that stock in 2012, in percentage?",0.7608,True,True,False
+0,RL,Double_RL/2008/page_21.pdf,2008,EXPD,Single_EXPD/2017/page_30.pdf-1,2017,3,"and how much does the standard and poor's 500 index change represent in relation to the the value of that stock in 2012, also in percentage?",1.0814,True,True,False
+0,RL,Double_RL/2008/page_21.pdf,2008,EXPD,Single_EXPD/2017/page_30.pdf-1,2017,4,what is the difference between this percentage representation for expeditors international of washington inc . and for standard and poor's 500 index?,-0.3206,True,True,False
+1,FRT,Double_FRT/2004/page_53.pdf,2004,ALXN,Single_ALXN/2007/page_104.pdf-2,2007,0,what was the minimum annual rental payment in 2011?,3200.0,False,True,False
+1,FRT,Double_FRT/2004/page_53.pdf,2004,ALXN,Single_ALXN/2007/page_104.pdf-2,2007,1,what was it in 2010?,3160.0,False,True,False
+1,FRT,Double_FRT/2004/page_53.pdf,2004,ALXN,Single_ALXN/2007/page_104.pdf-2,2007,2,what is the difference?,40.0,True,True,False
+1,FRT,Double_FRT/2004/page_53.pdf,2004,ALXN,Single_ALXN/2007/page_104.pdf-2,2007,3,what is the percent change?,0.01266,True,True,False
+2,UPS,Single_UPS/2006/page_32.pdf-1,2006,MRK,Double_MRK/2013/page_116.pdf,2013,0,what was the service cost in 2013?,682.0,False,True,False
+2,UPS,Single_UPS/2006/page_32.pdf-1,2006,MRK,Double_MRK/2013/page_116.pdf,2013,1,and what was it in 2012?,555.0,False,True,False
+2,UPS,Single_UPS/2006/page_32.pdf-1,2006,MRK,Double_MRK/2013/page_116.pdf,2013,2,"how much, then, did the 2013 amount represent in relation to this 2012 one?",1.22883,True,True,False
+2,UPS,Single_UPS/2006/page_32.pdf-1,2006,MRK,Double_MRK/2013/page_116.pdf,2013,3,and what is this value excluding the part equivalent to the 2012 amount?,0.22883,True,True,False
+2,UPS,Single_UPS/2006/page_32.pdf-1,2006,MRK,Double_MRK/2013/page_116.pdf,2013,4,"and between those two years, what was the variation in the net amortization?",151.0,True,True,False
+2,UPS,Single_UPS/2006/page_32.pdf-1,2006,MRK,Double_MRK/2013/page_116.pdf,2013,5,what is this variation as a percentage of that net amortization in 2012?,0.81622,True,True,False
+3,TROW,Double_TROW/2008/page_23.pdf,2008,BLK,Single_BLK/2008/page_75.pdf-2,2008,0,what is the sum between the absolute number of the realized and unrealized losses of 2008 and the investments at the end of 2008?,1222.0,True,True,False
+3,TROW,Double_TROW/2008/page_23.pdf,2008,BLK,Single_BLK/2008/page_75.pdf-2,2008,1,how much does the absolute number of the realized and unrealized losses of 2008 represents in relation to that sum?,0.3347,True,True,False
+4,AAP,Double_AAP/2006/page_85.pdf,2006,EOG,Single_EOG/2016/page_80.pdf-1,2016,0,what is the ratio of interest net of capitalized interest from 2015 to 2016?,1.13482,True,True,False
+4,AAP,Double_AAP/2006/page_85.pdf,2006,EOG,Single_EOG/2016/page_80.pdf-1,2016,1,what is the quotient less 1?,0.13482,True,True,False
+5,LLY,Double_LLY/2008/page_39.pdf,2008,LMT,Double_LMT/2002/page_33.pdf,2002,0,what was the profit margin for lockheed martin in 2002?,0.05999,True,True,False
+5,LLY,Double_LLY/2008/page_39.pdf,2008,LMT,Double_LMT/2002/page_33.pdf,2002,1,what was the total operating profit in 2002 and 2001?,803.0,True,True,False
+5,LLY,Double_LLY/2008/page_39.pdf,2008,LMT,Double_LMT/2002/page_33.pdf,2002,2,and including the value for 2003?,1148.0,True,True,False
+5,LLY,Double_LLY/2008/page_39.pdf,2008,LMT,Double_LMT/2002/page_33.pdf,2002,3,so what was the average value during this time?,382.66667,True,True,False
+6,AON,Double_AON/2007/page_184.pdf,2007,EXR,Single_EXR/2005/page_46.pdf-1,2005,0,"what was the net change in value of the high bid price for the quarter ended december 31, 2004 and the quarter ended march 31, 2005?",-0.25,True,True,False
+6,AON,Double_AON/2007/page_184.pdf,2007,EXR,Single_EXR/2005/page_46.pdf-1,2005,1,what is the percent change?,-0.01718,True,True,False
+7,KHC,Double_KHC/2016/page_23.pdf,2016,CDW,Double_CDW/2013/page_103.pdf,2013,0,how many common units were not vested at the time fo distribution?,5931.0,False,True,False
+7,KHC,Double_KHC/2016/page_23.pdf,2016,CDW,Double_CDW/2013/page_103.pdf,2013,1,what about the number of shares of restricted stock vested/settled?,1200544.0,False,True,False
+7,KHC,Double_KHC/2016/page_23.pdf,2016,CDW,Double_CDW/2013/page_103.pdf,2013,2,what is the total of these two?,1206475.0,True,True,False
+7,KHC,Double_KHC/2016/page_23.pdf,2016,CDW,Double_CDW/2013/page_103.pdf,2013,3,what proportion of total restricted stock does this represent?,0.31762,True,True,False
+8,EMR,Double_EMR/2017/page_54.pdf,2017,C,Double_C/2008/page_102.pdf,2008,0,what was the tier 2 capital in 2008?,37.4,True,True,False
+8,EMR,Double_EMR/2017/page_54.pdf,2017,C,Double_C/2008/page_102.pdf,2008,1,and what was it in 2007?,39.6,True,True,False
+8,EMR,Double_EMR/2017/page_54.pdf,2017,C,Double_C/2008/page_102.pdf,2008,2,"how much, then, did the 2008 amount represent in relation to this 2007 one?",0.94444,True,True,False
+8,EMR,Double_EMR/2017/page_54.pdf,2017,C,Double_C/2008/page_102.pdf,2008,3,"and in that last year of the period, what was the total capital?",108.4,False,True,False
+8,EMR,Double_EMR/2017/page_54.pdf,2017,C,Double_C/2008/page_102.pdf,2008,4,what was it in 2007?,121.6,False,True,False
+8,EMR,Double_EMR/2017/page_54.pdf,2017,C,Double_C/2008/page_102.pdf,2008,5,"by how much, then, did it increase over the year?",-13.2,True,True,False
+9,SNPS,Single_SNPS/2003/page_39.pdf-1,2003,TFX,Single_TFX/2006/page_50.pdf-1,2006,0,what was the positive value of united states securities?,114000.0,False,True,False
+9,SNPS,Single_SNPS/2003/page_39.pdf-1,2003,TFX,Single_TFX/2006/page_50.pdf-1,2006,1,what is the positive value of euros?,4472.0,False,True,False
+9,SNPS,Single_SNPS/2003/page_39.pdf-1,2003,TFX,Single_TFX/2006/page_50.pdf-1,2006,2,what is the sum?,118472.0,True,True,False
+9,SNPS,Single_SNPS/2003/page_39.pdf-1,2003,TFX,Single_TFX/2006/page_50.pdf-1,2006,3,what is the sum of singapore and canadian dollars?,118414.0,True,True,False
+9,SNPS,Single_SNPS/2003/page_39.pdf-1,2003,TFX,Single_TFX/2006/page_50.pdf-1,2006,4,what is the total sum including malaysian ringgits?,204377.0,True,True,False
+9,SNPS,Single_SNPS/2003/page_39.pdf-1,2003,TFX,Single_TFX/2006/page_50.pdf-1,2006,5,what is the ratio of the sum of us and euro payments to the total?,0.57967,True,True,False
+10,IPG,Single_IPG/2003/page_89.pdf-2,2003,AAL,Double_AAL/2014/page_18.pdf,2014,0,what was the total mainline operating expenses in millions in 2014?,31903.61446,True,True,False
+10,IPG,Single_IPG/2003/page_89.pdf-2,2003,AAL,Double_AAL/2014/page_18.pdf,2014,1,what was the anticipated percentage increase in aircraft fuel expense from 2014 to 2015?,0.00406,True,True,False
+11,REGN,Double_REGN/2010/page_68.pdf,2010,MAR,Double_MAR/2005/page_52.pdf,2005,0,what is the difference between fair value and carrying amount for notes and other long-term assets	in 2005?,38.0,True,True,False
+11,REGN,Double_REGN/2010/page_68.pdf,2010,MAR,Double_MAR/2005/page_52.pdf,2005,1,what is the fair value of notes and other long-term assets?,1770.0,False,True,False
+11,REGN,Double_REGN/2010/page_68.pdf,2010,MAR,Double_MAR/2005/page_52.pdf,2005,2,what about the carrying amount of notes and other long-term assets?,1702.0,False,True,False
+11,REGN,Double_REGN/2010/page_68.pdf,2010,MAR,Double_MAR/2005/page_52.pdf,2005,3,what is the difference?,68.0,True,True,False
+12,ADI,Single_ADI/2007/page_82.pdf-1,2007,APD,Double_APD/2013/page_36.pdf,2013,0,"in 2013, what was the ratio of sales to operating income?",6.88702,True,True,False
+12,ADI,Single_ADI/2007/page_82.pdf-1,2007,APD,Double_APD/2013/page_36.pdf,2013,1,and in 2012?,9.41928,True,True,False
+13,ANSS,Double_ANSS/2008/page_85.pdf,2008,CMCSA,Double_CMCSA/2004/page_30.pdf,2004,0,what portion of total capital expenditures are related to upgrading of cable systems in 2004?,0.24903,True,True,False
+13,ANSS,Double_ANSS/2008/page_85.pdf,2008,CMCSA,Double_CMCSA/2004/page_30.pdf,2004,1,what about in 2005?,0.06667,True,True,False
+14,PM,Double_PM/2014/page_67.pdf,2014,D,Single_D/2002/page_39.pdf-1,2002,0,what was the electricity supplied (in million mwhrs) in the year of 2002?,101.0,False,True,False
+14,PM,Double_PM/2014/page_67.pdf,2014,D,Single_D/2002/page_39.pdf-1,2002,1,and what was that of 2001?,95.0,False,True,False
+14,PM,Double_PM/2014/page_67.pdf,2014,D,Single_D/2002/page_39.pdf-1,2002,2,"what was, then, the change rate in the electricity supplied from 2001 to 2002?",1.06316,True,True,False
+14,PM,Double_PM/2014/page_67.pdf,2014,D,Single_D/2002/page_39.pdf-1,2002,3,what was the electricity supplied (in million mwhrs) in the year of 2002?,101.0,False,True,False
+14,PM,Double_PM/2014/page_67.pdf,2014,D,Single_D/2002/page_39.pdf-1,2002,4,"given that same growth pattern from 2002, what would be the electricity supplied (in million mwhrs) in the year of 2003?",107.37895,True,True,False
+15,AOS,Single_AOS/2003/page_23.pdf-1,2003,UNP,Double_UNP/2006/page_33.pdf,2006,0,what is the other income in 2006?,118.0,False,True,False
+15,AOS,Single_AOS/2003/page_23.pdf-1,2003,UNP,Double_UNP/2006/page_33.pdf,2006,1,what about in 2005?,145.0,False,True,False
+15,AOS,Single_AOS/2003/page_23.pdf-1,2003,UNP,Double_UNP/2006/page_33.pdf,2006,2,what is the sum for these two years?,263.0,True,True,False
+15,AOS,Single_AOS/2003/page_23.pdf-1,2003,UNP,Double_UNP/2006/page_33.pdf,2006,3,what about in 2004?,88.0,False,True,False
+15,AOS,Single_AOS/2003/page_23.pdf-1,2003,UNP,Double_UNP/2006/page_33.pdf,2006,4,what is the total for three years?,351.0,True,True,False
+15,AOS,Single_AOS/2003/page_23.pdf-1,2003,UNP,Double_UNP/2006/page_33.pdf,2006,5,what is the average for these three years?,117.0,True,True,False
+15,AOS,Single_AOS/2003/page_23.pdf-1,2003,UNP,Double_UNP/2006/page_33.pdf,2006,6,what is the net change in other income from 2004 to 2005?,57.0,True,True,False
+16,CE,Double_CE/2005/page_167.pdf,2005,DG,Single_DG/2006/page_58.pdf-1,2006,0,"what was the total amount in impairment charges recorded in the year of 2006, in millions?",9.4,False,True,False
+16,CE,Double_CE/2005/page_167.pdf,2005,DG,Single_DG/2006/page_58.pdf-1,2006,1,"and what was that of 2005, also in millions??",0.6,False,True,False
+16,CE,Double_CE/2005/page_167.pdf,2005,DG,Single_DG/2006/page_58.pdf-1,2006,2,"what was, then, the total impairment charges recorded in both of those years, in millions?",10.0,True,True,False
+16,CE,Double_CE/2005/page_167.pdf,2005,DG,Single_DG/2006/page_58.pdf-1,2006,3,"what was the the total amount in impairment charges recorded in the year of 2004, in millions?",0.2,False,True,False
+16,CE,Double_CE/2005/page_167.pdf,2005,DG,Single_DG/2006/page_58.pdf-1,2006,4,"including 2004, what would then be the total sum of impairment charges recorded in those three years?",10.2,True,True,False
+17,AMT,Double_AMT/2002/page_74.pdf,2002,AAPL,Double_AAPL/2002/page_63.pdf,2002,0,what is the minimum lease payments due in 2004?,78.0,False,True,False
+17,AMT,Double_AMT/2002/page_74.pdf,2002,AAPL,Double_AAPL/2002/page_63.pdf,2002,1,what about in 2003?,83.0,False,True,False
+17,AMT,Double_AMT/2002/page_74.pdf,2002,AAPL,Double_AAPL/2002/page_63.pdf,2002,2,what is the difference between 2003 and 2004?,-5.0,True,True,False
+17,AMT,Double_AMT/2002/page_74.pdf,2002,AAPL,Double_AAPL/2002/page_63.pdf,2002,3,what portion of total minimum lease payments is due in 2004?,0.1681,True,True,False
+18,TSCO,Double_TSCO/2017/page_68.pdf,2017,MSI,Double_MSI/2005/page_64.pdf,2005,0,what is the net change in the total contractual obligations due from 2006 to 2010?,360.0,True,True,False
+18,TSCO,Double_TSCO/2017/page_68.pdf,2017,MSI,Double_MSI/2005/page_64.pdf,2005,1,what about the amount of total contractual obligations due in 2006?,975.0,False,True,False
+18,TSCO,Double_TSCO/2017/page_68.pdf,2017,MSI,Double_MSI/2005/page_64.pdf,2005,2,what percentage change does this represent?,0.36923,True,True,False
+18,TSCO,Double_TSCO/2017/page_68.pdf,2017,MSI,Double_MSI/2005/page_64.pdf,2005,3,what portion of total obligations are related to long-term debt obligations?,0.65312,True,True,False
+19,MA,Double_MA/2008/page_116.pdf,2008,UAA,Double_UAA/2016/page_81.pdf,2016,0,what percentage do the scheduled maturities of long term debt due in 2019 represent in relation to the total ones?,0.07606,True,True,False
+19,MA,Double_MA/2008/page_116.pdf,2008,UAA,Double_UAA/2016/page_81.pdf,2016,1,and what is that percentage representation for the ones due in 2020?,0.03018,True,True,False
+20,HII,Double_HII/2011/page_100.pdf,2011,OKE,Double_OKE/2007/page_51.pdf,2007,0,what is the goodwill value from oneok partners?,431418.0,False,True,False
+20,HII,Double_HII/2011/page_100.pdf,2011,OKE,Double_OKE/2007/page_51.pdf,2007,1,what about the total goodwill?,600725.0,False,True,False
+20,HII,Double_HII/2011/page_100.pdf,2011,OKE,Double_OKE/2007/page_51.pdf,2007,2,what proportion of total goodwill is related to oneok partners?,0.71816,True,True,False
+20,HII,Double_HII/2011/page_100.pdf,2011,OKE,Double_OKE/2007/page_51.pdf,2007,3,what about the goodwill value from energy services?,10255.0,False,True,False
+20,HII,Double_HII/2011/page_100.pdf,2011,OKE,Double_OKE/2007/page_51.pdf,2007,4,what portion of total goodwill is related to energy services?,0.01707,True,True,False
+21,GPN,Double_GPN/2007/page_18.pdf,2007,VTR,Double_VTR/2003/page_39.pdf,2003,0,how much did the net debt represent in relation to the net equity?,0.77273,True,True,False
+21,GPN,Double_GPN/2007/page_18.pdf,2007,VTR,Double_VTR/2003/page_39.pdf,2003,1,and what percentage did the real estate investments represent in relation to the total assets?,0.83077,True,True,False
+22,VLO,Single_VLO/2011/page_126.pdf-1,2011,JPM,Double_JPM/2003/page_100.pdf,2003,0,"in the year of 2003, how much did the total of securities purchased under resale agreements represent in relation to one of securities borrowed?",1.5012,True,True,False
+22,VLO,Single_VLO/2011/page_126.pdf-1,2011,JPM,Double_JPM/2003/page_100.pdf,2003,1,and how much did the transactions accounted for as purchases under sfas represent in relation to the ones from 2002?,1.875,True,True,False
+23,HWM,Double_HWM/2015/page_87.pdf,2015,CAG,Double_CAG/2007/page_41.pdf,2007,0,"in 2005, what was the percentage of total net sales that were food and ingredients?",0.2623,True,True,False
+23,HWM,Double_HWM/2015/page_87.pdf,2015,CAG,Double_CAG/2007/page_41.pdf,2007,1,and the percentage of this value for 2006?,0.27774,True,True,False
+24,ILMN,Single_ILMN/2003/page_79.pdf-1,2003,UA,Single_UA/2005/page_33.pdf-2,2005,0,what is the change in total net revenue from 2004 to 2005?,89762.0,True,True,False
+24,ILMN,Single_ILMN/2003/page_79.pdf-1,2003,UA,Single_UA/2005/page_33.pdf-2,2005,1,what growth rate does this represent?,0.77771,True,True,False
+25,TMUS,Double_TMUS/2016/page_32.pdf,2016,HST,Single_HST/2007/page_62.pdf-1,2007,0,what was the net change in the value of amortization of deferred financing costs from 2006 to 2007?,-2.0,True,True,False
+25,TMUS,Double_TMUS/2016/page_32.pdf,2016,HST,Single_HST/2007/page_62.pdf-1,2007,1,what was the value in 2006?,15.0,False,True,False
+25,TMUS,Double_TMUS/2016/page_32.pdf,2016,HST,Single_HST/2007/page_62.pdf-1,2007,2,what is the net change in value divided by the 2006 value?,-0.13333,True,True,False
+26,PNC,Double_PNC/2007/page_108.pdf,2007,IP,Double_IP/2005/page_27.pdf,2005,0,"what is the total sales of uncoated papers sales in 2005, in millions?",4800.0,True,True,False
+26,PNC,Double_PNC/2007/page_108.pdf,2007,IP,Double_IP/2005/page_27.pdf,2005,1,what portion of total sales is generated by uncoated papers sales in 2005?,0.61069,True,True,False
+26,PNC,Double_PNC/2007/page_108.pdf,2007,IP,Double_IP/2005/page_27.pdf,2005,2,"what is the total sales of uncoated papers sales in 2004, in millions?",5000.0,True,True,False
+26,PNC,Double_PNC/2007/page_108.pdf,2007,IP,Double_IP/2005/page_27.pdf,2005,3,what about the total sales in 2004?,7670.0,False,True,False
+26,PNC,Double_PNC/2007/page_108.pdf,2007,IP,Double_IP/2005/page_27.pdf,2005,4,what portion is generated by uncoated papers sales?,0.65189,True,True,False
+27,IQV,Double_IQV/2016/page_57.pdf,2016,EW,Single_EW/2004/page_83.pdf-1,2004,0,what was total expense for all operating leases in 2003?,12.3,False,True,False
+27,IQV,Double_IQV/2016/page_57.pdf,2016,EW,Single_EW/2004/page_83.pdf-1,2004,1,what was the value in 2002?,6.8,False,True,False
+27,IQV,Double_IQV/2016/page_57.pdf,2016,EW,Single_EW/2004/page_83.pdf-1,2004,2,what was the net change?,5.5,True,True,False
+27,IQV,Double_IQV/2016/page_57.pdf,2016,EW,Single_EW/2004/page_83.pdf-1,2004,3,what was the 2002 value?,6.8,False,True,False
+27,IQV,Double_IQV/2016/page_57.pdf,2016,EW,Single_EW/2004/page_83.pdf-1,2004,4,what is the percent change?,0.80882,True,True,False
+28,VNO,Double_VNO/2003/page_102.pdf,2003,NWS,Double_NWS/2016/page_148.pdf,2016,0,what was the change in the company recorded deferred tax asset associated with its nols from 2015 to 2016?,40.0,True,True,False
+28,VNO,Double_VNO/2003/page_102.pdf,2003,NWS,Double_NWS/2016/page_148.pdf,2016,1,and what is this change as a percent of that tax asset in 2015?,0.07407,True,True,False
+28,VNO,Double_VNO/2003/page_102.pdf,2003,NWS,Double_NWS/2016/page_148.pdf,2016,2,"and as of june 30 of the last year of that period, how much did the u.s . federal net operating loss carry forwards represent in relation to the states one?",1.47676,True,True,False
+29,SYY,Double_SYY/2006/page_68.pdf,2006,STZ,Double_STZ/2005/page_57.pdf,2005,0,"between the two acquisitions, was the purchase price for hardy greater than for mondavi?",yes,True,False,False
+29,SYY,Double_SYY/2006/page_68.pdf,2006,STZ,Double_STZ/2005/page_57.pdf,2005,1,what portion of the net asset acquired is from goodwill?,0.56673,True,True,False
+30,RCL,Double_RCL/2005/page_40.pdf,2005,GS,Double_GS/2012/page_152.pdf,2012,0,what was the change in the total gains/ ( losses ) on financial assets and financial liabilities at fair value from 2017 to 2018?,-7761.0,True,True,False
+30,RCL,Double_RCL/2005/page_40.pdf,2005,GS,Double_GS/2012/page_152.pdf,2012,1,and what was that change from 2016 to 2017?,6606.0,True,True,False
+31,MAS,Double_MAS/2010/page_29.pdf,2010,WMT,Single_WMT/2018/page_46.pdf-2,2018,0,what is the net change in value of u.s. segment sales for walmart from 2017 to 2018?,10644.0,True,True,False
+31,MAS,Double_MAS/2010/page_29.pdf,2010,WMT,Single_WMT/2018/page_46.pdf-2,2018,1,what is that over the 2017 value?,0.03458,True,True,False
+32,HOLX,Double_HOLX/2004/page_87.pdf,2004,SPGI,Single_SPGI/2018/page_54.pdf-1,2018,0,what is the difference between the other net income of the years of 2018 and 2016?,-3.0,True,True,False
+32,HOLX,Double_HOLX/2004/page_87.pdf,2004,SPGI,Single_SPGI/2018/page_54.pdf-1,2018,1,how much does that difference represent in relation to the other net income of 2016?,-0.10714,True,True,False
+33,EMN,Single_EMN/2006/page_108.pdf-1,2006,FIS,Double_FIS/2006/page_48.pdf,2006,0,"what was the total of net earnings in 2006, in thousands?",259100.0,True,True,False
+33,EMN,Single_EMN/2006/page_108.pdf-1,2006,FIS,Double_FIS/2006/page_48.pdf,2006,1,and what was this amount as a portion of the total of processing and services revenues in that year?,0.10538,True,True,False
+33,EMN,Single_EMN/2006/page_108.pdf-1,2006,FIS,Double_FIS/2006/page_48.pdf,2006,2,"and between that year and the previous, what was the variation in the operating income?",178929.0,True,True,False
+33,EMN,Single_EMN/2006/page_108.pdf-1,2006,FIS,Double_FIS/2006/page_48.pdf,2006,3,"how much did this variation represent in relation to that income in 2005, in percentage?",1.4463,True,True,False
+34,MKTX,Double_MKTX/2004/page_24.pdf,2004,NCLH,Single_NCLH/2016/page_84.pdf-1,2016,0,what is the balance of accrued interest liability in 2016?,32.5,False,True,False
+34,MKTX,Double_MKTX/2004/page_24.pdf,2004,NCLH,Single_NCLH/2016/page_84.pdf-1,2016,1,what about in 2015?,34.2,False,True,False
+34,MKTX,Double_MKTX/2004/page_24.pdf,2004,NCLH,Single_NCLH/2016/page_84.pdf-1,2016,2,what is the change in the balance of accrued interest liability?,-1.7,True,True,False
+34,MKTX,Double_MKTX/2004/page_24.pdf,2004,NCLH,Single_NCLH/2016/page_84.pdf-1,2016,3,what percentage change does this represent?,-0.04971,True,True,False
+35,WRK,Double_WRK/2018/page_39.pdf,2018,ZBH,Double_ZBH/2002/page_32.pdf,2002,0,what percentage of contractual obligations are due in less than 1 year?,0.86917,True,True,False
+35,WRK,Double_WRK/2018/page_39.pdf,2018,ZBH,Double_ZBH/2002/page_32.pdf,2002,1,and what percentage is comprised of short-term debt?,0.71683,True,True,False
+36,SLG,Double_SLG/2002/page_56.pdf,2002,DISCA,Double_DISCA/2008/page_141.pdf,2008,0,"from september 30 to december 31 of 2008, what was the decline in the performance price of the s&p 500?",21.68,True,True,False
+36,SLG,Double_SLG/2002/page_56.pdf,2002,DISCA,Double_DISCA/2008/page_141.pdf,2008,1,and what was that price in december 31?,74.86,False,True,False
+36,SLG,Double_SLG/2002/page_56.pdf,2002,DISCA,Double_DISCA/2008/page_141.pdf,2008,2,"what is, then, that decline as a portion of this december amount?",0.28961,True,True,False
+36,SLG,Double_SLG/2002/page_56.pdf,2002,DISCA,Double_DISCA/2008/page_141.pdf,2008,3,"and as of that same date, what was the performance price of the disck stock?",83.69,False,True,False
+36,SLG,Double_SLG/2002/page_56.pdf,2002,DISCA,Double_DISCA/2008/page_141.pdf,2008,4,"which price, then, was greater at december 31: the s&p 500 or the disck one?",yes,True,False,False
+37,ORLY,Double_ORLY/2006/page_40.pdf,2006,KMI,Double_KMI/2010/page_164.pdf,2010,0,what was the amount of the current maturities of long-term debt?,-1263.3,True,True,False
+37,ORLY,Double_ORLY/2006/page_40.pdf,2006,KMI,Double_KMI/2010/page_164.pdf,2010,1,and what was the total long-term debt for the first column?,10282.8,False,True,False
+37,ORLY,Double_ORLY/2006/page_40.pdf,2006,KMI,Double_KMI/2010/page_164.pdf,2010,2,"what was, then, that amount as a portion of this long-term debt?",-0.12286,True,True,False
+37,ORLY,Double_ORLY/2006/page_40.pdf,2006,KMI,Double_KMI/2010/page_164.pdf,2010,3,and what is that in percentage?,-1263.3,True,True,False
+37,ORLY,Double_ORLY/2006/page_40.pdf,2006,KMI,Double_KMI/2010/page_164.pdf,2010,4,"and concerning that amount and the total long-term debt, what was the combined total of both, in millions?",11546.1,True,True,False
+38,PPG,Single_PPG/2005/page_24.pdf-2,2005,JKHY,Double_JKHY/2008/page_30.pdf,2008,0,what is the net change in the balance of cash and cash equivalents from 2007 to 2008?,-23052.0,True,True,False
+38,PPG,Single_PPG/2005/page_24.pdf-2,2005,JKHY,Double_JKHY/2008/page_30.pdf,2008,1,what percentage change does this represent?,-0.26013,True,True,False
+38,PPG,Single_PPG/2005/page_24.pdf-2,2005,JKHY,Double_JKHY/2008/page_30.pdf,2008,2,what is the value cash used for stock repurchases during 2007?,98413.0,False,True,False
+38,PPG,Single_PPG/2005/page_24.pdf-2,2005,JKHY,Double_JKHY/2008/page_30.pdf,2008,3,what about the value for dividend payments?,21685.0,False,True,False
+39,CDNS,Double_CDNS/2006/page_30.pdf,2006,BKR,Double_BKR/2017/page_105.pdf,2017,0,"as of december 31, 2017, how much did the balance of class a common stock represent in relation to the one of class b common stock?",0.5972,True,True,False
+39,CDNS,Double_CDNS/2006/page_30.pdf,2006,BKR,Double_BKR/2017/page_105.pdf,2017,1,"and what is this class b balance as a percentage of the total number of authorized shares of that stock, in that same date?",0.5656,True,True,False
+40,RSG,Double_RSG/2008/page_114.pdf,2008,TXN,Double_TXN/2017/page_55.pdf,2017,0,what amount of long-term debt was retired during 2017?,625.0,True,True,False
+40,RSG,Double_RSG/2008/page_114.pdf,2008,TXN,Double_TXN/2017/page_55.pdf,2017,1,what is the net change in assumed health care cost trend rate from 2016 to 2017?,0.75,True,True,False
+41,HIG,Double_HIG/2004/page_122.pdf,2004,MRO,Single_MRO/2003/page_65.pdf-4,2003,0,what was the state and local income taxes after federal income tax effects in 2003?,2.2,False,True,False
+41,HIG,Double_HIG/2004/page_122.pdf,2004,MRO,Single_MRO/2003/page_65.pdf-4,2003,1,what was the state and local income taxes after federal income tax effects in 2002?,3.9,False,True,False
+41,HIG,Double_HIG/2004/page_122.pdf,2004,MRO,Single_MRO/2003/page_65.pdf-4,2003,2,what is the net change?,-1.7,True,True,False
+41,HIG,Double_HIG/2004/page_122.pdf,2004,MRO,Single_MRO/2003/page_65.pdf-4,2003,3,what was the state and local income taxes after federal income tax effects in 2002?,3.9,False,True,False
+41,HIG,Double_HIG/2004/page_122.pdf,2004,MRO,Single_MRO/2003/page_65.pdf-4,2003,4,what was the percent change?,-0.4359,True,True,False
+42,CNC,Double_CNC/2003/page_41.pdf,2003,FITB,Double_FITB/2008/page_69.pdf,2008,0,what was the sum of the securitization rates of standby letters of credit from 2007 and 2008?,1.36,True,True,False
+42,CNC,Double_CNC/2003/page_41.pdf,2003,FITB,Double_FITB/2008/page_69.pdf,2008,1,and what is the average between them?,0.68,True,True,False
+42,CNC,Double_CNC/2003/page_41.pdf,2003,FITB,Double_FITB/2008/page_69.pdf,2008,2,"for that same period, what was the total of unfunded commitments, in millions?",290.0,True,True,False
+43,PKG,Double_PKG/2001/page_78.pdf,2001,AMAT,Double_AMAT/2012/page_37.pdf,2012,0,what is the net change of a $100 investment in s&p500 index from 2007 to 2010?,-18.24,True,True,False
+43,PKG,Double_PKG/2001/page_78.pdf,2001,AMAT,Double_AMAT/2012/page_37.pdf,2012,1,what roi does this represent?,-0.1824,True,True,False
+43,PKG,Double_PKG/2001/page_78.pdf,2001,AMAT,Double_AMAT/2012/page_37.pdf,2012,2,what is the total cash dividend per share for the first three quarters of 2012?,0.27,True,True,False
+43,PKG,Double_PKG/2001/page_78.pdf,2001,AMAT,Double_AMAT/2012/page_37.pdf,2012,3,what about the cash dividend per share in the fourth quarter?,0.08,False,True,False
+43,PKG,Double_PKG/2001/page_78.pdf,2001,AMAT,Double_AMAT/2012/page_37.pdf,2012,4,what about the yearly dividend per share?,0.35,True,True,False
+43,PKG,Double_PKG/2001/page_78.pdf,2001,AMAT,Double_AMAT/2012/page_37.pdf,2012,5,what is the total amount used for cash dividends in 2012?,438.0,False,True,False
+43,PKG,Double_PKG/2001/page_78.pdf,2001,AMAT,Double_AMAT/2012/page_37.pdf,2012,6,"on average, how many shares received the yearly dividend in 2012?",1251.42857,True,True,False
+44,CB,Double_CB/2008/page_144.pdf,2008,HUM,Double_HUM/2004/page_78.pdf,2004,0,"what was the total value of cash and cash equivalents and investment securities, combined?",99797.0,True,True,False
+44,CB,Double_CB/2008/page_144.pdf,2008,HUM,Double_HUM/2004/page_78.pdf,2004,1,"and what is the total value of premiums receivable and other current assets and property and equipment and other assets, also combined?",27463.0,True,True,False
+44,CB,Double_CB/2008/page_144.pdf,2008,HUM,Double_HUM/2004/page_78.pdf,2004,2,"what is, then, the total sum of these values, composing the total assets?",127260.0,True,True,False
+44,CB,Double_CB/2008/page_144.pdf,2008,HUM,Double_HUM/2004/page_78.pdf,2004,3,and what percentage of these total assets does the property and equipment and other assets represent?,0.0538,True,True,False
+44,CB,Double_CB/2008/page_144.pdf,2008,HUM,Double_HUM/2004/page_78.pdf,2004,4,"in that same period, what was the amount of the total liabilities?",92749.0,True,True,False
+44,CB,Double_CB/2008/page_144.pdf,2008,HUM,Double_HUM/2004/page_78.pdf,2004,5,and what percentage of it is from the current ones?,0.23293,True,True,False
+45,CME,Double_CME/2010/page_71.pdf,2010,DRE,Double_DRE/2002/page_13.pdf,2002,0,what was the change in the gain on land sales from 2001 to 2002?,-602.0,True,True,False
+45,CME,Double_CME/2010/page_71.pdf,2010,DRE,Double_DRE/2002/page_13.pdf,2002,1,and what was that gain in 2001?,5080.0,False,True,False
+45,CME,Double_CME/2010/page_71.pdf,2010,DRE,Double_DRE/2002/page_13.pdf,2002,2,"how much, then, does that change represent in relation to this 2001 gain?",-0.1185,True,True,False
+45,CME,Double_CME/2010/page_71.pdf,2010,DRE,Double_DRE/2002/page_13.pdf,2002,3,and what is that in percentage?,-11.85039,True,True,False
+45,CME,Double_CME/2010/page_71.pdf,2010,DRE,Double_DRE/2002/page_13.pdf,2002,4,"in that same two year period, what was the variation in the total of general and administrative expenses?",9.8,True,True,False
+45,CME,Double_CME/2010/page_71.pdf,2010,DRE,Double_DRE/2002/page_13.pdf,2002,5,and what is this variation as a percentage of that total in 2001?,0.62821,True,True,False
+46,AWK,Double_AWK/2012/page_118.pdf,2012,FTV,Single_FTV/2017/page_45.pdf-1,2017,0,what were sales in 2016?,6224.3,False,True,False
+46,AWK,Double_AWK/2012/page_118.pdf,2012,FTV,Single_FTV/2017/page_45.pdf-1,2017,1,what were sales in 2015?,6178.8,False,True,False
+46,AWK,Double_AWK/2012/page_118.pdf,2012,FTV,Single_FTV/2017/page_45.pdf-1,2017,2,what was the change in sales?,45.5,True,True,False
+46,AWK,Double_AWK/2012/page_118.pdf,2012,FTV,Single_FTV/2017/page_45.pdf-1,2017,3,what was the percent change?,0.00736,True,True,False
+47,ANET,Double_ANET/2015/page_155.pdf,2015,ECL,Single_ECL/2015/page_70.pdf-2,2015,0,"what was the percent of lifo inventories as a percent of consolidated inventories as of december 31, 2015?",39.0,False,True,False
+47,ANET,Double_ANET/2015/page_155.pdf,2015,ECL,Single_ECL/2015/page_70.pdf-2,2015,1,and what was that in 2014?,37.0,False,True,False
+47,ANET,Double_ANET/2015/page_155.pdf,2015,ECL,Single_ECL/2015/page_70.pdf-2,2015,2,"what was, then, the combined percent of lifo inventories as a percent of consolidated inventories for both years?",76.0,True,True,False
+47,ANET,Double_ANET/2015/page_155.pdf,2015,ECL,Single_ECL/2015/page_70.pdf-2,2015,3,and what is the average annual percent for that same period?,38.0,True,True,False
+48,KIM,Double_KIM/2006/page_67.pdf,2006,MMM,Single_MMM/2005/page_36.pdf-1,2005,0,"in 2005, what was the change in the stock price from the year end low to high?",17.74,True,True,False
+48,KIM,Double_KIM/2006/page_67.pdf,2006,MMM,Single_MMM/2005/page_36.pdf-1,2005,1,"and how much does this change represent in relation to that stock price in the year end low, in percentage?",0.25448,True,True,False
+49,SLB,Double_SLB/2003/page_57.pdf,2003,AES,Double_AES/2000/page_111.pdf,2000,0,"in january of 2000, what was the full price of the acquisition of the preferred non-voting shares at auction from bndes, in billions?",1.0,False,True,False
+49,SLB,Double_SLB/2003/page_57.pdf,2003,AES,Double_AES/2000/page_111.pdf,2000,1,what percentage of the total preferred non-voting shares were acquired in that transaction?,0.59,False,True,False
+49,SLB,Double_SLB/2003/page_57.pdf,2003,AES,Double_AES/2000/page_111.pdf,2000,2,"what, then, can be concluded to have been the total value of all preferred non-voting shares, in billions?",1.69492,True,True,False
+49,SLB,Double_SLB/2003/page_57.pdf,2003,AES,Double_AES/2000/page_111.pdf,2000,3,"in that same year, what was the revenue for the company 2019s investments in 50% ( 50 % ) or less owned investments accounted for using the equity method?",6241.0,False,True,False
+49,SLB,Double_SLB/2003/page_57.pdf,2003,AES,Double_AES/2000/page_111.pdf,2000,4,and what was that revenue in the previous year?,5960.0,False,True,False
+49,SLB,Double_SLB/2003/page_57.pdf,2003,AES,Double_AES/2000/page_111.pdf,2000,5,"by how much, then, did it increase over the year?",281.0,True,True,False
+49,SLB,Double_SLB/2003/page_57.pdf,2003,AES,Double_AES/2000/page_111.pdf,2000,6,and what is this increase as a portion of the 1999 revenue?,0.04715,True,True,False

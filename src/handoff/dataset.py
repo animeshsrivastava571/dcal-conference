@@ -95,15 +95,27 @@ def _rows_from_run(run_dir: Path) -> list[dict]:
     return rows
 
 
-def build(runs_dir: Path = RUNS_DIR, min_sessions: int = 10) -> pd.DataFrame:
-    """Collect every complete long-session run, skipping pilots and aborted runs.
+def build(
+    runs_dir: Path = RUNS_DIR,
+    min_sessions: int = 10,
+    run_names: list[str] | None = None,
+) -> pd.DataFrame:
+    """Collect complete long-session runs, skipping pilots and aborted runs.
 
-    An aborted run still writes a line per session, so completeness is counted
-    from sessions that actually carry results; a run that died partway would
-    otherwise contribute a lopsided arm.
+    With ``run_names`` exactly those runs are used, so a release cannot pick up
+    a stray pilot. An aborted run still writes a line per session, so
+    completeness is counted from sessions that actually carry results.
     """
+    if run_names:
+        missing = [n for n in run_names if not (runs_dir / n / "sessions.jsonl").exists()]
+        if missing:
+            raise SystemExit(f"runs not found under {runs_dir}: {missing}")
+        candidates = [runs_dir / n for n in run_names]
+    else:
+        candidates = sorted(p for p in runs_dir.iterdir() if p.is_dir())
+
     rows: list[dict] = []
-    for run_dir in sorted(p for p in runs_dir.iterdir() if p.is_dir()):
+    for run_dir in candidates:
         transcript = run_dir / "sessions.jsonl"
         if not transcript.exists():
             continue
@@ -116,15 +128,85 @@ def build(runs_dir: Path = RUNS_DIR, min_sessions: int = 10) -> pd.DataFrame:
     return pd.DataFrame(rows, columns=COLUMNS)
 
 
+# Numbers the paper reports for the 115-session single-agent runs, in percent.
+# Each is (abstention, arm base, metric, low, high); a range covers the forced
+# ceilings, which the paper reports as 82.9-84.3 across separately run arms.
+PAPER = [
+    ("permitted", "C", "accuracy", 83.9, 83.9),
+    ("permitted", "3a@1536", "accuracy", 69.9, 69.9),
+    ("permitted", "3a@768", "accuracy", 48.6, 48.6),
+    ("permitted", "3a@768", "wrong", 27.0, 27.0),
+    ("permitted", "3a@768", "abstained", 24.4, 24.4),
+    ("forbidden", "C", "accuracy", 82.9, 84.3),
+    ("forbidden", "3a@768", "accuracy", 48.3, 48.3),
+    ("forbidden", "3a@768", "wrong", 38.8, 38.8),
+    ("forbidden", "3a@768", "abstained", 12.8, 12.8),
+    ("forbidden", "3b@768", "accuracy", 46.4, 46.4),
+    ("forbidden", "3b@768", "wrong", 36.8, 36.8),
+    ("forbidden", "3c@768", "accuracy", 72.4, 72.4),
+    ("forbidden", "3c@768", "wrong", 17.6, 17.6),
+]
+TOLERANCE = 0.06  # the paper rounds to one decimal place
+
+
+def check_against_paper(frame: pd.DataFrame) -> list[str]:
+    """Return a failure message per paper number the release does not reproduce."""
+    single = frame[frame["pipeline"] == "single-agent"].copy()
+    single["base"] = [str(arm).split("/")[0] for arm in single["arm"]]
+    per_run = (
+        single.groupby(["run", "abstention", "base"])
+        .agg(
+            n=("outcome", "size"),
+            accuracy=("outcome", lambda s: 100 * (s == "correct").mean()),
+            wrong=("outcome", lambda s: 100 * (s == "wrong").mean()),
+            abstained=("outcome", lambda s: 100 * (s == "abstained").mean()),
+        )
+        .reset_index()
+    )
+
+    failures = []
+    print(f"\n{'check':<42} {'paper':>12} {'release':>18}")
+    for abstention, base, metric, low, high in PAPER:
+        found = per_run[(per_run["abstention"] == abstention) & (per_run["base"] == base)]
+        label = f"{abstention} {base} {metric}"
+        target = f"{low}" if low == high else f"{low}-{high}"
+        if found.empty:
+            failures.append(f"{label}: arm not present in the selected runs")
+            print(f"  [FAIL] {label:<36} {target:>12} {'missing':>18}")
+            continue
+        values = found[metric].round(2).tolist()
+        ok = all(low - TOLERANCE <= v <= high + TOLERANCE for v in values)
+        shown = ", ".join(f"{v:.1f}" for v in values)
+        print(f"  [{'ok ' if ok else 'FAIL'}] {label:<36} {target:>12} {shown:>18}")
+        if not ok:
+            failures.append(f"{label}: paper {target}, release {shown}")
+    return failures
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", default="dataset")
     parser.add_argument("--min-sessions", type=int, default=10)
+    parser.add_argument(
+        "--runs", nargs="+", metavar="RUN_DIR",
+        help="exact run directory names under runs/ to release (default: all complete runs)",
+    )
+    parser.add_argument(
+        "--skip-paper-check", action="store_true",
+        help="write even if the numbers do not reproduce the paper (diagnostics only)",
+    )
     args = parser.parse_args()
 
-    frame = build(min_sessions=args.min_sessions)
+    frame = build(min_sessions=args.min_sessions, run_names=args.runs)
     if frame.empty:
         raise SystemExit("no qualifying runs found")
+
+    failures = check_against_paper(frame)
+    if failures and not args.skip_paper_check:
+        raise SystemExit(
+            f"\n{len(failures)} paper number(s) not reproduced; nothing written. "
+            "Select the paper's runs with --runs."
+        )
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
